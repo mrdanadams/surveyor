@@ -1,8 +1,6 @@
 ---
 ---
 
-# A = {}
-
 $ ->
   $frames = $('#frames')
   $widths = $('#widths')
@@ -18,7 +16,6 @@ $ ->
 
     w = ($(window).width() - (margin * (widths.length + 1))) / widths.length
 
-
     spent = margin
     for i in [0...widths.length]
       width = +widths[i]
@@ -28,18 +25,35 @@ $ ->
       actual = width * scale
       left = parseInt(spent + (actual - width) / 2)
 
-      height = h / scale
+      height = h / scale - margin
       top = parseInt((h - height - margin) / 2)
 
-      # TODO measure the height and re-adjust the top
-      $el = $("<iframe class='frame' src='#{url}'>#{width}</iframe>")
-      $el.css
-        width: width
-        height: height
+      # frame = new Frame(url: url, width: width, height: height: )
+
+      # the controls provide a place to put stuff that can be positioned
+      # with the frame but won't be subject to scaling.
+      $frame = $("""<iframe class='frame' src='#{url}'>#{width}</iframe>""")
+
+      $frame.css
         "-webkit-transform": "scale(#{scale})"
         left: left
         top: top
+        width: width
+        height: height
 
-      $el.appendTo $frames
+      $controls = $("""
+<div class="controls">
+  <span class='caption'>#{width} px</span>
+</div>
+      """)
+      $frame.appendTo $frames
+
+      $controls.css
+        left: spent
+        width: actual
+
+      $controls.appendTo $frames
+
       spent += actual + margin
+
 
