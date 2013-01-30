@@ -31,10 +31,10 @@ class Frame
       height: height
 
     $controls = $("""
-<div class="controls"><div class="inner">
-  <button class='open'>open</button>
-  <button class='zoom'>zoom</button>
-  <span class='caption'>#{width} px (#{parseInt(scale * 100)}%)</span>
+<div class="controls navbar"><div class="inner navbar-inner">
+  <button class='open btn' title="Open in a new window"><i class="icon-fullscreen"></i></button>
+  <button class='zoom btn'>zoom</button>
+  <h4 class='caption muted'>#{width} px <span class="label label-info">#{parseInt(scale * 100)}%</span></h4>
 </div></div>
     """)
     $frame.appendTo options.container
@@ -53,19 +53,24 @@ class Frame
 
     $controls.appendTo options.container
 
-$ ->
-  $frames = $('#frames')
-  $widths = $('#widths')
+view =
+  render: ->
+    @$frames = $('#frames')
+    @$widths = $('#widths')
 
-  $('#reload').on 'click', ->
-    $frames.empty()
+    that = this
+    # $('#reload').on 'click', -> that.load(); false
+    $('form').on 'submit', -> that.load(); false
+
+  load: ->
+    @$frames.empty()
     total = 0
     margin = 10
     url = $('#url').val()
 
-    widths = $widths.val().replace(/^[\s]+|[\s]+$/, '').split(/[^\d]+/)
+    widths = @$widths.val().replace(/^[\s]+|[\s]+$/, '').split(/[^\d]+/)
     viewWidth = ($(window).width() - (margin * (widths.length + 1))) / widths.length
-    viewHeight = $(window).height() - $frames.offset().top
+    viewHeight = $(window).height() - @$frames.offset().top
 
     spent = margin
     for i in [0...widths.length]
@@ -74,7 +79,7 @@ $ ->
 
       actualWidth = Math.min(viewWidth, width)
       new Frame
-        container: $frames
+        container: @$frames
         viewWidth: actualWidth
         viewHeight: viewHeight
         width: width
@@ -84,5 +89,4 @@ $ ->
 
       spent += actualWidth + margin
 
-
-
+$ -> view.render()

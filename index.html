@@ -3,11 +3,14 @@ layout: default
 title: Srvyr - Survey your responsive designs across many sizes
 ---
 
-<header id="header"><div class="container">
-  <input type="text" id="url" placeholder="Your site URL" value="http://training.dev/" />
-  <label for="widths">@</label>
-  <input type="text" id="widths" placeholder="Screen widths (space separated)" value="320 480 650 800 1024" />
-  <button id="reload">Reload</button>
+<header id="header" class="navbar"><div class="navbar-inner">
+  <a href="#" class="brand">srvyr</a>
+  <form class="form-inline">
+    <input type="text" id="url" placeholder="Your site URL" value="http://training.dev/" />
+    <label for="widths">@</label>
+    <input type="text" id="widths" placeholder="Screen widths (space separated)" value="320 480 650 800 1024" />
+    <button id="reload" class="btn btn-primary">Load <i class="icon-circle-arrow-down icon-white"></i></button>
+  </form>
 </div></header>
 
 <div id="frames">
