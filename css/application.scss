@@ -1,0 +1,27 @@
+@import "normalize.css";
+
+.container { max-width: 1024px; margin: 0 auto; }
+
+#header {
+  padding: 20px;
+  border-bottom: 1px solid #444;
+  box-shadow: 0px 0px 3px rgba(0,0,0,.8);
+  text-align: center;
+}
+
+$m: 20px; // this is synced with the js
+
+#frames {
+  // border: 1px solid red;  
+  position: relative;
+  margin-top: 20px;
+}
+
+iframe { border: 0; margin: 0; padding: 0;}
+.frame {
+  // margin-left: $m;
+  height: 300px;
+  // float: left;
+  position: absolute; top: 0;
+  -webkit-box-shadow: 0px 0px 5px #000;
+}
