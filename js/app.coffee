@@ -84,6 +84,10 @@ view =
     @loadFrame(url, widths, false)
 
   loadHash: (hash) ->
+    if hash.length == 0
+      $("#content").addClass('intro')
+      return
+
     n = hash.indexOf('/')    
     widths = hash.slice(0,n).split(/[^\d]+/)
     url = hash.slice(n+1)
@@ -94,6 +98,8 @@ view =
     @loadFrame(url, widths, true)
 
   loadFrame: (url, widths, silent) ->
+    $('#content').removeClass('intro') # just in case
+
     @$frames.empty()
     total = 0
     margin = 10
