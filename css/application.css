@@ -1,0 +1,62 @@
+@import url(normalize.css);
+@import url(bootstrap.min.css);
+body { background: #222; }
+
+#header { position: absolute; left: 0; right: 0; top: 0; z-index: 10000; text-align: center; }
+#header form { margin: 0; padding-top: 5px; }
+#header button { margin-top: 0; }
+#header label { color: #dadada; }
+
+#sharing { width: 400px; position: absolute; top: 10px; right: 0; z-index: 10001; }
+#sharing a { float: right; }
+
+.navbar .brand { text-transform: uppercase; font-weight: 100; position: absolute; left: 5px; }
+
+#url { width: 700px; max-width: 25%; }
+
+#widths { width: 200px; max-width: 15%; }
+
+#welcome { color: #f0f0f0; text-align: center; display: none; }
+#welcome h1 { font-size: 91px; text-transform: uppercase; font-weight: 100; margin: 0.75em 0 0.5em 0; text-shadow: 0px 0px 5px #111111; }
+#welcome h2 { line-height: 2em; margin-bottom: 100px; }
+#welcome h3 { font-size: 21px; line-height: 1.5em; }
+#welcome p { font-size: 18px; line-height: 1.25em; }
+#welcome p, #welcome h3 { max-width: 850px; margin: 1em auto; }
+#welcome h2, #welcome h3 { font-weight: 100; }
+#welcome h3 { letter-spacing: 1px; }
+#welcome .attribution { font-size: 16px; }
+
+#header, #header .navbar-inner, #header input, .brand, #header label { -webkit-transition: all 0.5s; }
+
+.intro #welcome { display: block; }
+.intro #header { top: 225px; }
+.intro #header .navbar-inner { height: 60px; background: none; border: 0; box-shadow: none; }
+.intro #header input[type=text] { height: 40px; font-size: 24px; line-height: 40px; font-weight: 100; }
+.intro #header button { height: 50px; line-height: 40px; margin-left: 5px; }
+.intro #header .brand { opacity: 0; }
+.intro #header label { font-size: 18px; font-weight: 100; }
+
+#frames { position: relative; margin-top: 90px; }
+
+iframe { border: 0; margin: 0; padding: 0; }
+
+.frame { position: absolute; top: 0; background: white; -webkit-transition: all 0.5s; }
+.frame.zoomed { -webkit-transform: scale(1) !important; position: fixed; top: 40px !important; bottom: 0 !important; height: 90% !important; left: 25% !important; }
+
+.controls { position: absolute; top: -40px; -webkit-transition: all 0.5s; }
+.controls .inner { position: relative; }
+.controls button { opacity: 0; -webkit-transition: opacity 0.25s; z-index: 100; position: absolute; }
+.controls:hover button { opacity: 1; }
+.controls.zoomed { position: fixed; top: 5px; }
+.controls.zoomed button { opacity: 1; }
+
+.caption { display: block; position: absolute; top: 0; left: 0; right: 0; bottom: 0; text-align: center; z-index: 0; }
+.caption span { position: absolute; top: 2px; display: inline-block; margin-left: 5px; }
+
+.open { right: 5px; }
+
+.zoom { left: 0; display: none; }
+
+@media only screen and (max-width: 900px) { #header .brand { display: none; }
+  #header { text-align: left; }
+  .intro #header { text-align: center; } }
