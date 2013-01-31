@@ -43,8 +43,10 @@ class Frame
       left: leftOffset
       width: w
 
-    $('.open', $controls).on 'click', ((w,h) ->
-      -> window.open(url, '', "width=#{w},height=#{h}"))(width, height)
+    $('.open', $controls).on 'click', ->
+      window.open(url, '', "width=#{width},height=#{height}")
+      galytics.trackEvent "open", label:url, value:width
+      false
 
     # $('.zoom', $controls).on 'click', ->
     #   $frame.toggleClass 'zoomed'
@@ -74,6 +76,8 @@ view =
     widths = @$widths.val().replace(/^[\s]+|[\s]+$/, '').split(/[^\d]+/)
     viewWidth = ($(window).width() - (margin * (widths.length + 1))) / widths.length
     viewHeight = $(window).height() - @$frames.offset().top
+
+    galytics.trackEvent "load", label:url, value:widths.length
 
     spent = margin
     for i in [0...widths.length]
