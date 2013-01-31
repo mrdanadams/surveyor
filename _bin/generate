@@ -1,7 +1,8 @@
 #!/bin/sh
 
-commit -a
 jekyll
 cp -rf _site/* deploy
 cd deploy
+git add .
+git commit -a -m "updated deploy"
 git push
