@@ -21,6 +21,7 @@ class Frame
 
     # the controls provide a place to put stuff that can be positioned
     # with the frame but won't be subject to scaling.
+    # url += "#" + new Date().getTime() # force page reloads
     $frame = $("""<iframe class='frame' src='#{url}'>#{width}</iframe>""")
 
     $frame.css
