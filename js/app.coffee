@@ -59,8 +59,11 @@ view =
     @$widths = $('#widths')
 
     that = this
-    # $('#reload').on 'click', -> that.load(); false
-    $('form').on 'submit', -> that.load(); false
+    $('form').on 'submit', ->
+      return false if $('#url').val().length == 0 || $('#widths').val().length == 0
+      $('#content').removeClass('intro')
+      that.load()
+      false
 
   load: ->
     @$frames.empty()

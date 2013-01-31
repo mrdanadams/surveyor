@@ -5,9 +5,10 @@
 
 // .container { max-width: 1024px; margin: 0 auto; }
 
-body { background: #1d1d1d; }
+body { background: #222; }
 
 #header {
+  position: absolute; left: 0; right: 0; top: 0; z-index: 10000;
   // padding: 20px;
   // border-bottom: 1px solid #444;
   // box-shadow: 0px 0px 3px rgba(0,0,0,.8);
@@ -15,12 +16,65 @@ body { background: #1d1d1d; }
 
   form { margin: 0; padding-top: 5px; }
   button { margin-top: 0; }
+  label { color: #dadada; }
+}
+
+#sharing {
+  width: 400px;
+  position: absolute; top: 10px; right: 0; z-index: 10001;
+  a { float: right; }
+}
+
+.navbar .brand {
+  text-transform: uppercase; font-weight: 100;
+  position: absolute; left: 5px;
+}
+#url { width: 700px; max-width: 25%; }
+#widths { width: 200px; max-width: 15%;}
+
+#welcome {
+  color: #f0f0f0; text-align: center;
+  h1 {
+    font-size: 91px;
+    text-transform: uppercase; font-weight: 100;
+    margin: .75em 0 .5em 0;
+    text-shadow: 0px 0px 5px #111;
+  }
+  h2 { line-height: 2em; margin-bottom: 100px; }
+  h3 { font-size: 21px; line-height: 1.5em; }
+  p {
+    font-size: 18px; line-height: 1.25em;
+    // color: #c0c0c0;
+  }
+  p, h3 { max-width: 850px; margin: 1em auto; }
+  h2, h3 { font-weight: 100; }
+  h3 { letter-spacing: 1px; }
+  .attribution { font-size: 16px; }
+  display: none;
+}
+
+#header, #header .navbar-inner, 
+#header input, .brand, #header label {
+  -webkit-transition: all .5s;
+}
+
+.intro {
+  #welcome { display: block; }
+  #header {  
+    top: 225px;
+
+    .navbar-inner { height: 60px; background: none; border: 0; box-shadow: none; }
+    input[type=text] { height: 40px; font-size: 24px; line-height: 40px; font-weight: 100; }
+    button { height: 50px; line-height: 40px; margin-left: 5px; }
+    .brand { opacity: 0; }
+    label { font-size: 18px; font-weight: 100;}
+  }
 }
 
 #frames {
-  // border: 1px solid red;  
+  // border: 1px solid red;
   position: relative;
-  margin-top: 50px
+  margin-top: 90px
 }
 
 iframe { border: 0; margin: 0; padding: 0;}
@@ -38,7 +92,6 @@ iframe { border: 0; margin: 0; padding: 0;}
     left: 25% !important;
   }
 }
-
 
 .controls {
   position: absolute; top: -40px;
@@ -72,3 +125,9 @@ iframe { border: 0; margin: 0; padding: 0;}
 
 .open { right: 5px; }
 .zoom { left: 0; display: none; }
+
+@media only screen and (max-width: 900px) {
+  #header .brand { display: none; }
+  #header { text-align: left; }
+  .intro #header { text-align: center; }
+}
