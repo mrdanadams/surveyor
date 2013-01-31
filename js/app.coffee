@@ -25,6 +25,7 @@ class Frame
 
     $frame.css
       "-webkit-transform": "scale(#{scale})"
+      "-moz-transform": "scale(#{scale})"
       left: left
       top: top
       width: width
