@@ -1,6 +1,8 @@
 ---
 ---
 
+hasher = @hasher
+
 class Frame
   constructor: (options) ->
     w = options.viewWidth     # width to be render in the view
@@ -57,6 +59,7 @@ class Frame
 
     $controls.appendTo options.container
 
+# the main view
 view =
   render: ->
     @$frames = $('#frames')
@@ -69,19 +72,34 @@ view =
       that.load()
       false
 
+    hasher.changed.add (hash) -> that.loadHash(hash)
+    hasher.initialized.add (hash) -> that.loadHash(hash)
+    hasher.init()
+
   load: ->
+    url = $('#url').val()
+    url = "http://#{url}" unless url.match(/^http/)
+    widths = @$widths.val().replace(/^[\s]+|[\s]+$/, '').split(/[^\d]+/)
+
+    @loadFrame(url, widths, false)
+
+  loadHash: (hash) ->
+    n = hash.indexOf('/')    
+    widths = hash.slice(0,n).split(/[^\d]+/)
+    url = hash.slice(n+1)
+
+    $('#url').val url
+    $('#widths').val widths.join(' ')
+
+    @loadFrame(url, widths, true)
+
+  loadFrame: (url, widths, silent) ->
     @$frames.empty()
     total = 0
     margin = 10
-    url = $('#url').val()
 
-    url = "http://#{url}" unless url.match(/^http/)
-
-    widths = @$widths.val().replace(/^[\s]+|[\s]+$/, '').split(/[^\d]+/)
     viewWidth = ($(window).width() - (margin * (widths.length + 1))) / widths.length
     viewHeight = $(window).height() - @$frames.offset().top
-
-    galytics.trackEvent "load", label:url, value:widths.length
 
     spent = margin
     for i in [0...widths.length]
@@ -99,5 +117,12 @@ view =
         url: url
 
       spent += actualWidth + margin
+
+    unless silent
+      hash = ''+widths.join(' ')+'/'+url
+      hasher.setHash hash
+      galytics.trackEvent "load", label:url, value:widths.length
+
+
 
 $ -> view.render()
