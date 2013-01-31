@@ -118,6 +118,10 @@ view =
 
       spent += actualWidth + margin
 
+    # note: it's enforced that domain has a protocol at this point
+    domain = url.replace(/^https?:\/\//,'').replace(/\/.*/, '')
+    $('title').html "Surveyor - #{domain} @ #{widths.join(' ')}"
+
     unless silent
       hash = ''+widths.join(' ')+'/'+url
       hasher.setHash hash
