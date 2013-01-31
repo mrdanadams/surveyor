@@ -86,6 +86,7 @@ view =
   loadHash: (hash) ->
     if hash.length == 0
       $("#content").addClass('intro')
+      @$frames.empty()
       return
 
     n = hash.indexOf('/')    
