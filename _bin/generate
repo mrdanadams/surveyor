@@ -5,4 +5,5 @@ cp -rf _site/* deploy
 cd deploy
 git add .
 git commit -a -m "updated deploy"
-git push
+git push origin gh-pages
+
