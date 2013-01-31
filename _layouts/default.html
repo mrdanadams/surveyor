@@ -36,7 +36,6 @@
   })();
 
 </script>
-  <script src="js/galytics.min.js" async></script>
-  <script src="js/zepto.min.js"></script>
-  <script src="js/app.js"></script>
+  {% bundle %} [js/galytics.min.js, js/zepto.min.js] {% endbundle %}
+  <script src="/js/app.js"></script>
 </html>
