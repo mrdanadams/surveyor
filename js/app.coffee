@@ -74,6 +74,8 @@ view =
     margin = 10
     url = $('#url').val()
 
+    url = "http://#{url}" unless url.match(/^http/)
+
     widths = @$widths.val().replace(/^[\s]+|[\s]+$/, '').split(/[^\d]+/)
     viewWidth = ($(window).width() - (margin * (widths.length + 1))) / widths.length
     viewHeight = $(window).height() - @$frames.offset().top
