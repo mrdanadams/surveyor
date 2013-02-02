@@ -133,7 +133,7 @@ view =
     unless silent
       hash = ''+widths.join(' ')+'/'+url
       hasher.setHash hash
-      galytics.trackEvent "load", label:url, value:widths.length
+      galytics.trackEvent "load", label:domain, value:widths.length
 
 
 
