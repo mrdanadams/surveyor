@@ -28,7 +28,7 @@ body { background: #222; }
 
 #header, #header .navbar-inner, #header input, .brand, #header label { -webkit-transition: all 0.5s; -moz-transition: all 0.5s; -o-transition: all 0.5s; transition: all 0.5s; }
 
-.intro #welcome { display: block; }
+.intro #welcome, .intro #frames { display: block; }
 .intro #header { top: 225px; }
 .intro #header .navbar-inner { height: 60px; background: none; border: 0; box-shadow: none; }
 .intro #header input[type=text] { height: 40px; font-size: 24px; line-height: 40px; font-weight: 100; }

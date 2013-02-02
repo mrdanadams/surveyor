@@ -22,7 +22,6 @@
       $frame = $("<iframe class='frame' src='" + url + "'>" + width + "</iframe>");
       $frame.css({
         "-webkit-transform": "scale(" + scale + ")",
-        "-moz-transform": "scale(" + scale + ")",
         left: left,
         top: top,
         width: width,
@@ -34,14 +33,11 @@
         left: leftOffset,
         width: w
       });
-      $('.open', $controls).on('click', function() {
-        window.open(url, '', "width=" + width + ",height=" + height);
-        galytics.trackEvent("open", {
-          label: url,
-          value: width
-        });
-        return false;
-      });
+      $('.open', $controls).on('click', (function(w, h) {
+        return function() {
+          return window.open(url, '', "width=" + w + ",height=" + h);
+        };
+      })(width, height));
       $controls.appendTo(options.container);
     }
 
@@ -70,16 +66,9 @@
       total = 0;
       margin = 10;
       url = $('#url').val();
-      if (!url.match(/^http/)) {
-        url = "http://" + url;
-      }
       widths = this.$widths.val().replace(/^[\s]+|[\s]+$/, '').split(/[^\d]+/);
       viewWidth = ($(window).width() - (margin * (widths.length + 1))) / widths.length;
       viewHeight = $(window).height() - this.$frames.offset().top;
-      galytics.trackEvent("load", {
-        label: url,
-        value: widths.length
-      });
       spent = margin;
       _results = [];
       for (i = _i = 0, _ref = widths.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {

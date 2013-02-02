@@ -1,7 +1,9 @@
 (function() {
-  var Frame, hasher, view;
+  var Frame, galytics, hasher, view;
 
   hasher = this.hasher;
+
+  galytics = this.galytics;
 
   Frame = (function() {
 
@@ -128,7 +130,7 @@
         hash = '' + widths.join(' ') + '/' + url;
         hasher.setHash(hash);
         return galytics.trackEvent("load", {
-          label: url,
+          label: domain,
           value: widths.length
         });
       }
