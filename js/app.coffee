@@ -2,6 +2,7 @@
 ---
 
 hasher = @hasher
+galytics = @galytics
 
 class Frame
   constructor: (options) ->
