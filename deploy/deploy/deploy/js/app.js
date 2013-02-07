@@ -1,5 +1,7 @@
 (function() {
-  var Frame, view;
+  var Frame, hasher, view;
+
+  hasher = this.hasher;
 
   Frame = (function() {
 
@@ -55,7 +57,7 @@
       this.$frames = $('#frames');
       this.$widths = $('#widths');
       that = this;
-      return $('form').on('submit', function() {
+      $('form').on('submit', function() {
         if ($('#url').val().length === 0 || $('#widths').val().length === 0) {
           return false;
         }
@@ -63,25 +65,46 @@
         that.load();
         return false;
       });
+      hasher.changed.add(function(hash) {
+        return that.loadHash(hash);
+      });
+      hasher.initialized.add(function(hash) {
+        return that.loadHash(hash);
+      });
+      return hasher.init();
     },
     load: function() {
-      var actualWidth, i, margin, spent, total, url, viewHeight, viewWidth, width, widths, _i, _ref, _results;
-      this.$frames.empty();
-      total = 0;
-      margin = 10;
+      var url, widths;
       url = $('#url').val();
       if (!url.match(/^http/)) {
         url = "http://" + url;
       }
       widths = this.$widths.val().replace(/^[\s]+|[\s]+$/, '').split(/[^\d]+/);
+      return this.loadFrame(url, widths, false);
+    },
+    loadHash: function(hash) {
+      var n, url, widths;
+      if (hash.length === 0) {
+        $("#content").addClass('intro');
+        this.$frames.empty();
+        return;
+      }
+      n = hash.indexOf('/');
+      widths = hash.slice(0, n).split(/[^\d]+/);
+      url = hash.slice(n + 1);
+      $('#url').val(url);
+      $('#widths').val(widths.join(' '));
+      return this.loadFrame(url, widths, true);
+    },
+    loadFrame: function(url, widths, silent) {
+      var actualWidth, domain, hash, i, margin, spent, total, viewHeight, viewWidth, width, _i, _ref;
+      $('#content').removeClass('intro');
+      this.$frames.empty();
+      total = 0;
+      margin = 10;
       viewWidth = ($(window).width() - (margin * (widths.length + 1))) / widths.length;
       viewHeight = $(window).height() - this.$frames.offset().top;
-      galytics.trackEvent("load", {
-        label: url,
-        value: widths.length
-      });
       spent = margin;
-      _results = [];
       for (i = _i = 0, _ref = widths.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
         width = +widths[i];
         if (!(width > 0)) {
@@ -97,9 +120,18 @@
           margin: margin,
           url: url
         });
-        _results.push(spent += actualWidth + margin);
+        spent += actualWidth + margin;
       }
-      return _results;
+      domain = url.replace(/^https?:\/\//, '').replace(/\/.*/, '');
+      $('title').html("Surveyor - " + domain + " @ " + (widths.join(' ')));
+      if (!silent) {
+        hash = '' + widths.join(' ') + '/' + url;
+        hasher.setHash(hash);
+        return galytics.trackEvent("load", {
+          label: url,
+          value: widths.length
+        });
+      }
     }
   };
 

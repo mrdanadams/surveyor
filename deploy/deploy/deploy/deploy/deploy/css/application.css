@@ -26,7 +26,7 @@ body { background: #222; }
 #welcome h3 { letter-spacing: 1px; }
 #welcome .attribution { font-size: 16px; }
 
-#header, #header .navbar-inner, #header input, .brand, #header label { -webkit-transition: all 0.5s; -moz-transition: all 0.5s; -o-transition: all 0.5s; transition: all 0.5s; }
+#header, #header .navbar-inner, #header input, .brand, #header label { -webkit-transition: all 0.5s; }
 
 .intro #welcome { display: block; }
 .intro #header { top: 225px; }
@@ -40,12 +40,15 @@ body { background: #222; }
 
 iframe { border: 0; margin: 0; padding: 0; }
 
-.frame { position: absolute; top: 0; background: white; -webkit-transition: all 0.5s; -moz-transition: all 0.5s; -o-transition: all 0.5s; transition: all 0.5s; }
+.frame { position: absolute; top: 0; background: white; -webkit-transition: all 0.5s; }
+.frame.zoomed { -webkit-transform: scale(1) !important; position: fixed; top: 40px !important; bottom: 0 !important; height: 90% !important; left: 25% !important; }
 
-.controls { position: absolute; top: -40px; -webkit-transition: all 0.5s; -moz-transition: all 0.5s; -o-transition: all 0.5s; transition: all 0.5s; }
+.controls { position: absolute; top: -40px; -webkit-transition: all 0.5s; }
 .controls .inner { position: relative; }
-.controls button { opacity: 0; -webkit-transition: opacity 0.25s; -moz-transition: opacity 0.25s; -o-transition: opacity 0.25s; transition: opacity 0.25s; z-index: 100; position: absolute; }
+.controls button { opacity: 0; -webkit-transition: opacity 0.25s; z-index: 100; position: absolute; }
 .controls:hover button { opacity: 1; }
+.controls.zoomed { position: fixed; top: 5px; }
+.controls.zoomed button { opacity: 1; }
 
 .caption { display: block; position: absolute; top: 0; left: 0; right: 0; bottom: 0; text-align: center; z-index: 0; }
 .caption span { position: absolute; top: 2px; display: inline-block; margin-left: 5px; }

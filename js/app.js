@@ -129,9 +129,12 @@
       if (!silent) {
         hash = '' + widths.join(' ') + '/' + url;
         hasher.setHash(hash);
-        return galytics.trackEvent("load", {
+        galytics.trackEvent("load", {
           label: domain,
           value: widths.length
+        });
+        return galytics.trackEvent("load-url", {
+          label: url
         });
       }
     }
