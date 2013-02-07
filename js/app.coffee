@@ -134,6 +134,7 @@ view =
       hash = ''+widths.join(' ')+'/'+url
       hasher.setHash hash
       galytics.trackEvent "load", label:domain, value:widths.length
+      galytics.trackEvent "load-url", label:url
 
 
 
